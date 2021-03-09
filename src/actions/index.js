@@ -40,7 +40,7 @@ export const fetchStreams = () => async (dispatch) => {
 export const fetchStream = (id) => async (dispatch) => {
   const response = await streams.get(`/streams/${id}`);
 
-  dispatch({ typr: FETCH_STREAM, payload: response.data });
+  dispatch({ type: FETCH_STREAM, payload: response.data });
 };
 
 export const editStream = (id, formValues) => async (dispatch) => {
