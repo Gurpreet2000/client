@@ -17,17 +17,23 @@ const StreamDelete = (props) => {
     </React.Fragment>
   );
 
+  const renderContent = () => {
+    if (!props.stream) return "Are you sure you want to delete this stream?";
+    return `Are you sure you want to delete this stream title: "${props.stream.title}"`;
+  };
+
   return (
-    <div>
-      StreamDelete
-      <Modal
-        title="Delete Steam"
-        content="Are you sure you want to delete this stream?"
-        actions={actions}
-        onDismiss={() => history.goBack()}
-      />
-    </div>
+    <Modal
+      title="Delete Steam"
+      content={renderContent()}
+      actions={actions}
+      onDismiss={() => history.goBack()}
+    />
   );
 };
 
-export default connect(null, { fetchStream })(StreamDelete);
+const mapStatetoProps = (state, ownProps) => {
+  return { stream: state.streams[ownProps.match.params.id] };
+};
+
+export default connect(mapStatetoProps, { fetchStream })(StreamDelete);
